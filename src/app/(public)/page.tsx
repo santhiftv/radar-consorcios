@@ -348,29 +348,20 @@ export default async function HomePage() {
         )}
       </section>
 
-      {/* Formulário no fim */}
-      <section id="receber-ofertas-fim" className="bg-navy-900 py-14 text-white scroll-mt-20">
-        <div className="container-page grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-center">
+      {/* CTA final */}
+      <section className="bg-navy-900 py-14 text-white">
+        <div className="container-page flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
           <div>
-            <h2 className="text-3xl font-extrabold leading-tight sm:text-4xl">
+            <h2 className="text-2xl font-extrabold leading-tight sm:text-3xl">
               Pronto para comparar as melhores ofertas?
             </h2>
-            <p className="mt-4 max-w-xl text-navy-100">
-              Um minuto para preencher e consultores selecionados montam propostas sob medida para você. É grátis e sem
-              compromisso.
-            </p>
-            <p className="mt-4 text-sm text-navy-100/80">
-              Consórcio não garante contemplação em data específica. Os consultores são independentes.
+            <p className="mt-2 max-w-xl text-navy-100">
+              Um minuto para preencher e consultores selecionados montam propostas sob medida para você.
             </p>
           </div>
-          <div className="card bg-white p-6 text-navy-900 md:p-8">
-            <LeadForm
-              modalities={mods}
-              administrators={administrators}
-              source="home"
-              turnstileSiteKey={turnstileSiteKey}
-            />
-          </div>
+          <ButtonLink href="#receber-ofertas" size="lg">
+            Quero receber ofertas
+          </ButtonLink>
         </div>
       </section>
 
