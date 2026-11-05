@@ -4,17 +4,17 @@
  * Valores que mudam por ambiente vêm de variáveis NEXT_PUBLIC_*.
  */
 export const siteConfig = {
-  name: process.env.NEXT_PUBLIC_SITE_NAME ?? 'Consórcio Intel',
-  shortName: 'Consórcio Intel',
-  tagline: 'Planeje seu consórcio com clareza e receba propostas de consultores',
+  name: process.env.NEXT_PUBLIC_SITE_NAME ?? 'Radar Consórcios',
+  shortName: 'Radar Consórcios',
+  tagline: 'Encontre as melhores condições de consórcio para você',
   description:
-    'Simulador ilustrativo de consórcio, conteúdo educativo e solicitação de propostas de consultores independentes. Sem promessas de contemplação.',
-  url: (process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000').replace(/\/$/, ''),
+    'Diga o que quer conquistar e receba ofertas de consultores selecionados: grupos novos, promoções e cartas contempladas ou em andamento. É grátis e sem compromisso.',
+  url: (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://radarconsorcios.com.br').replace(/\/$/, ''),
   locale: 'pt_BR',
   logo: {
     // Substitua por /brand/logo.svg quando houver logotipo definitivo
-    text: 'Consórcio',
-    accent: 'Intel',
+    text: 'Radar',
+    accent: 'Consórcios',
   },
   colors: {
     navy: '#0B1F3A',
@@ -37,7 +37,7 @@ export const siteConfig = {
     contemplation:
       'Consórcio não garante contemplação em data específica. A contemplação ocorre por sorteio ou lance, conforme o regulamento de cada grupo.',
     independence:
-      'O Consórcio Intel é uma plataforma independente. Não é administradora de consórcio e não possui parceria oficial com administradoras, salvo quando expressamente informado.',
+      'O Radar Consórcios é uma plataforma independente. Não é administradora de consórcio e não possui parceria oficial com administradoras, salvo quando expressamente informado.',
     subscription:
       'A assinatura dá acesso a oportunidades conforme disponibilidade real. Não há garantia de volume de leads nem de vendas.',
   },

@@ -3,8 +3,8 @@ import { siteConfig } from '@/config/site';
 import { buttonClass } from './ui';
 
 const NAV = [
-  { href: '/simulador', label: 'Simulador' },
-  { href: '/como-funciona', label: 'Como funciona' },
+  { href: '/#como-funciona', label: 'Como funciona' },
+  { href: '/#parcelas', label: 'Parcelas de referência' },
   { href: '/blog', label: 'Blog' },
   { href: '/perguntas-frequentes', label: 'Dúvidas' },
 ];
@@ -39,11 +39,8 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="hidden items-center gap-2 md:flex">
-          <Link href="/planos" className={buttonClass('secondary', 'sm')}>
-            Sou consultor
-          </Link>
-          <Link href="/solicitar-proposta" className={buttonClass('primary', 'sm')}>
-            Receber propostas
+          <Link href="/#receber-ofertas" className={buttonClass('primary', 'sm')}>
+            Quero receber ofertas
           </Link>
         </div>
         <details className="relative md:hidden">
@@ -56,14 +53,14 @@ export function SiteHeader() {
                 {n.label}
               </Link>
             ))}
-            <Link href="/planos" className="block rounded-lg px-3 py-2 text-sm font-medium text-navy-900 hover:bg-navy-50">
+            <Link href="/planos" className="block rounded-lg px-3 py-2 text-sm font-medium text-muted hover:bg-navy-50">
               Sou consultor
             </Link>
-            <Link href="/entrar" className="block rounded-lg px-3 py-2 text-sm font-medium text-navy-900 hover:bg-navy-50">
+            <Link href="/entrar" className="block rounded-lg px-3 py-2 text-sm font-medium text-muted hover:bg-navy-50">
               Entrar
             </Link>
-            <Link href="/solicitar-proposta" className={buttonClass('primary', 'sm', 'mt-2 w-full')}>
-              Receber propostas
+            <Link href="/#receber-ofertas" className={buttonClass('primary', 'sm', 'mt-2 w-full')}>
+              Quero receber ofertas
             </Link>
           </div>
         </details>
