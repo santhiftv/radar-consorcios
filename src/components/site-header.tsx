@@ -38,7 +38,13 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center gap-3 md:flex">
+          <Link href="/planos" className="text-sm font-medium text-navy-900 hover:underline">
+            Sou consultor
+          </Link>
+          <Link href="/entrar" className="text-sm font-medium text-muted hover:text-navy-900">
+            Entrar
+          </Link>
           <Link href="/#receber-ofertas" className={buttonClass('primary', 'sm')}>
             Quero receber ofertas
           </Link>

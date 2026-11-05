@@ -49,9 +49,47 @@ export default async function PlanosPage() {
         <h2 className="text-2xl font-bold">Dúvidas de consultores</h2>
         <div className="mt-5"><FaqList items={consultantFaq} /></div>
       </section>
-      <p className="mt-8 text-sm text-muted">
-        Já tem conta? <a href="/entrar" className="font-semibold text-navy-700 underline">Entrar no painel</a>
-      </p>
+      <section className="mt-14 rounded-2xl border border-line bg-navy-50 p-6 sm:p-8">
+        <h2 className="text-2xl font-bold text-navy-900">O que você acessa depois de assinar</h2>
+        <p className="mt-2 text-navy-900">
+          Assim que o pagamento é confirmado, seu usuário e senha liberam o painel do consultor. Cada consultor tem seu
+          próprio acesso e vê apenas os leads a ele atribuídos.
+        </p>
+        <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+          <li className="flex items-start gap-2 text-sm text-navy-900">
+            <span aria-hidden className="mt-0.5 text-brand-green">✓</span>
+            <span><strong>Novos leads</strong> — oportunidades que combinam com sua região, modalidade e filtros.</span>
+          </li>
+          <li className="flex items-start gap-2 text-sm text-navy-900">
+            <span aria-hidden className="mt-0.5 text-brand-green">✓</span>
+            <span><strong>Meus leads</strong> — contatos reivindicados, histórico de contatos e status.</span>
+          </li>
+          <li className="flex items-start gap-2 text-sm text-navy-900">
+            <span aria-hidden className="mt-0.5 text-brand-green">✓</span>
+            <span><strong>Desempenho</strong> — reivindicações do mês, taxa de contato e resultados.</span>
+          </li>
+          <li className="flex items-start gap-2 text-sm text-navy-900">
+            <span aria-hidden className="mt-0.5 text-brand-green">✓</span>
+            <span><strong>Assinatura</strong> — plano atual, cobrança via Mercado Pago, upgrade ou cancelamento.</span>
+          </li>
+          <li className="flex items-start gap-2 text-sm text-navy-900">
+            <span aria-hidden className="mt-0.5 text-brand-green">✓</span>
+            <span><strong>Perfil e preferências</strong> — dados profissionais, administradoras, horários de contato.</span>
+          </li>
+          <li className="flex items-start gap-2 text-sm text-navy-900">
+            <span aria-hidden className="mt-0.5 text-brand-green">✓</span>
+            <span><strong>Suporte</strong> — canal direto para tirar dúvidas e contestar leads.</span>
+          </li>
+        </ul>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <a href="/cadastro" className="rounded-lg bg-brand-green px-5 py-3 font-semibold text-white hover:bg-brand-green-dark">
+            Criar minha conta
+          </a>
+          <a href="/entrar" className="rounded-lg border border-line px-5 py-3 font-semibold text-navy-900 hover:bg-white">
+            Já tenho conta — entrar
+          </a>
+        </div>
+      </section>
     </div>
   );
 }
