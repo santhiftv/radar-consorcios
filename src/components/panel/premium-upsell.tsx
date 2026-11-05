@@ -48,8 +48,7 @@ export function PremiumUpsellButton({ premium, current, urgency, leadLabel }: Pr
   }, [open]);
 
   const advantages: Array<{ title: string; detail?: string }> = [
-    { title: 'Leads sem limite por ciclo', detail: current && !current.claimsUnlimited ? `hoje: até ${current.claimLimit} por ciclo` : undefined },
-    { title: 'Exclusividade nos leads mais urgentes (8 a 10)', detail: 'como este — só o Premium recebe' },
+        { title: 'Exclusividade nos leads mais urgentes (8 a 10)', detail: 'como este — só o Premium recebe' },
     {
       title: 'Acesso no momento em que o lead é publicado',
       detail: current && current.priorityDelaySeconds > 0 ? `hoje: ${minutes(current.priorityDelaySeconds)} depois` : undefined,

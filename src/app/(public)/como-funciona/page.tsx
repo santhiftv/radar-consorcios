@@ -22,7 +22,7 @@ export default function ComoFuncionaPage() {
         decoding="async"
         className="mt-6 aspect-[8/3] w-full rounded-3xl object-cover object-[50%_35%]"
       />
-      <div className="text-muted"><p className="mt-1.5 text-right text-[11px] opacity-70">Foto: <a href="https://unsplash.com/@brucemars?utm_source=radar_consorcios&utm_medium=referral" target="_blank" rel="noopener noreferrer" className="underline">bruce mars</a> / <a href="https://unsplash.com/?utm_source=radar_consorcios&utm_medium=referral" target="_blank" rel="noopener noreferrer" className="underline">Unsplash</a></p></div>
+      <div className="text-muted"><p className="mt-1.5 text-right text-[11px] opacity-70">Foto: <a href="https://unsplash.com/@brucemars?utm_source=consorcio_intel&utm_medium=referral" target="_blank" rel="noopener noreferrer" className="underline">bruce mars</a> / <a href="https://unsplash.com/?utm_source=consorcio_intel&utm_medium=referral" target="_blank" rel="noopener noreferrer" className="underline">Unsplash</a></p></div>
       <div className="mt-8 grid gap-6 md:grid-cols-2">
         <Card className="p-6">
           <h2 className="text-xl font-bold">Para quem procura consórcio</h2>

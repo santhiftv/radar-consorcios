@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { cancelSubscriptionAction } from '../actions';
 import { PlanPolicies } from '@/components/content-blocks';
 import { ActionForm } from '@/components/panel/action-form';
@@ -94,7 +95,7 @@ export default async function AssinaturaPage({ searchParams }: { searchParams: P
               </Card>
             ))}
           </div>
-          <p className="mt-4 text-xs text-muted">Ao assinar, você concorda com os Termos do Consultor aceitos no cadastro. Renovação mensal automática.</p>
+          <p className="mt-4 text-xs text-muted">Ao assinar, você concorda com os <Link href="/termos#consultor" target="_blank" className="underline">Termos do Consultor</Link>, incluindo a <Link href="/termos#reembolso" target="_blank" className="underline">política de cancelamento e reembolso</Link>. Renovação mensal automática.</p>
         </>
       )}
 

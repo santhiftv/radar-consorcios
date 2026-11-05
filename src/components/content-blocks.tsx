@@ -117,7 +117,7 @@ export function PlanPolicies({ plans }: { plans: PublicPlan[] }) {
         <h3 className="text-lg font-bold">Regras importantes</h3>
         <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm text-navy-900">
           <li>Renovação mensal automática; cancele quando quiser, com acesso até o fim do ciclo pago.</li>
-          <li>O limite é o máximo de reivindicações no ciclo (o plano mais completo não tem limite), conforme a disponibilidade real — não há promessa de quantidade de leads.</li>
+          <li>Não há teto de reivindicações: o volume de pedidos é uma estimativa que depende da demanda real da sua região e modalidade. Não há garantia de quantidade de pedidos nem de vendas.</li>
           <li>Registre o contato em até 24 h após reivindicar; sem registro, o lead expira e pode ser redistribuído uma vez.</li>
           <li>Leads duplicados ou inválidos podem ser contestados em até 7 dias; contestações aceitas devolvem a reivindicação.</li>
           <li>{siteConfig.disclaimers.subscription}</li>

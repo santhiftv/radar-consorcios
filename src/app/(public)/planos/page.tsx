@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { Metadata } from 'next';
 import { consultantFaq } from '@/content/faq';
 import { FaqList, PlanPolicies, PlansGrid } from '@/components/content-blocks';
@@ -8,7 +9,7 @@ export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: 'Planos para consultores de consórcio',
-  description: 'Receba oportunidades autorizadas de pessoas interessadas em consórcio na sua região. Planos mensais com limite de reivindicações e regras transparentes.',
+  description: 'Receba oportunidades autorizadas de pessoas interessadas em consórcio na sua região. Planos mensais sem teto de pedidos, com regras de prioridade transparentes.',
   alternates: { canonical: '/planos' },
 };
 
@@ -43,7 +44,7 @@ export default async function PlanosPage() {
         ))}
       </ol>
       <div className="mt-10"><PlansGrid plans={plans} /></div>
-      <p className="mt-4 text-sm text-muted">Preços e limites são condições comerciais iniciais e podem mudar; alterações valem a partir da renovação seguinte, com aviso prévio.</p>
+      <p className="mt-4 text-sm text-muted">Preços e regras são condições comerciais iniciais e podem mudar; alterações valem a partir da renovação seguinte, com aviso prévio. O volume de pedidos é uma estimativa e não é garantido. Ao assinar, você concorda com os <Link href="/termos#consultor" className="underline">Termos do Consultor</Link>, incluindo a <Link href="/termos#reembolso" className="underline">política de cancelamento e reembolso</Link>.</p>
       <div className="mt-10"><PlanPolicies plans={plans} /></div>
       <section className="mt-14">
         <h2 className="text-2xl font-bold">Dúvidas de consultores</h2>

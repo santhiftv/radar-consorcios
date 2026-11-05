@@ -29,7 +29,7 @@ export const consumerFaq = [
 export const consultantFaq = [
   {
     q: 'Quantos leads vou receber?',
-    a: 'Não prometemos quantidade. O limite do plano é o máximo que você pode reivindicar no ciclo mensal, conforme a disponibilidade real de oportunidades compatíveis com sua região, modalidade e filtros.',
+    a: 'Não prometemos quantidade. Os planos não têm teto de reivindicações, mas o volume de pedidos é uma estimativa que depende da demanda real compatível com sua região, modalidade e filtros. Não há garantia de quantidade de pedidos nem de vendas.',
   },
   {
     q: 'Como funciona a prioridade entre os planos?',

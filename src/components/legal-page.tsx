@@ -11,7 +11,7 @@ export function LegalPage({ title, updatedAt, intro, sections }: { title: string
       {intro && <p className="mt-6 text-lg text-muted">{intro}</p>}
       <div className="prose-article mt-6">
         {sections.map((s) => (
-          <section key={s.heading}>
+          <section key={s.heading} id={s.id} className={s.id ? 'scroll-mt-20' : undefined}>
             <h2>{s.heading}</h2>
             {s.paragraphs.map((p) => <p key={p.slice(0, 40)}>{p}</p>)}
           </section>

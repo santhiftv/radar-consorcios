@@ -409,7 +409,7 @@ export default async function HomePage() {
           </div>
           <ol className="grid gap-3">
             {[
-              ['Escolha o plano', 'Básico, Médio ou Mais caro — com limite de reivindicações e regras claras.'],
+              ['Escolha o plano', 'Essencial, Profissional ou Premium — com regras claras de prioridade e sem teto de pedidos.'],
               ['Crie sua conta', 'Cadastro com e-mail e senha, confirmação do e-mail e perfil profissional.'],
               ['Pague no Mercado Pago', 'Assinatura mensal recorrente, sem fidelidade.'],
               ['Acesse o painel', 'Veja novos leads da sua região, reivindique e acompanhe desempenho.'],

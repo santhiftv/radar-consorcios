@@ -13,7 +13,7 @@ export default async function CadastroPage({ searchParams }: { searchParams: Pro
       <h1 className="text-2xl font-bold">Criar conta de consultor</h1>
       {plan ? (
         <p className="mt-2 rounded-lg bg-navy-50 px-3 py-2 text-sm text-navy-900">
-          Plano escolhido: <strong>{plan.name}</strong> — {formatBRL(plan.priceCents, { cents: false })}/mês, {plan.claimsUnlimited ? 'leads sem limite' : `até ${plan.claimLimit} leads`} por ciclo.{' '}
+          Plano escolhido: <strong>{plan.name}</strong> — {formatBRL(plan.priceCents, { cents: false })}/mês, {plan.claimsUnlimited ? 'pedidos sem limite (volume conforme a demanda)' : `até ${plan.claimLimit} pedidos por ciclo`}.{' '}
           <Link href="/planos" className="underline">Trocar</Link>
         </p>
       ) : (

@@ -7,7 +7,7 @@
 import { siteConfig } from '../config/site';
 
 export const PRIVACY_NOTICE_VERSION = '2026-10-25.1';
-export const CONSULTANT_TERMS_VERSION = '2026-10-25.1';
+export const CONSULTANT_TERMS_VERSION = '2026-11-05.1';
 export const MAX_CONSULTANTS_PER_LEAD = 2; // 1 atribuição + até 1 redistribuição (lead_max_redistributions)
 
 /** Aviso curto exibido ANTES do envio do formulário de propostas. */
@@ -32,6 +32,8 @@ export const privacyNotice = {
 export interface LegalSection {
   heading: string;
   paragraphs: string[];
+  /** Âncora opcional para links diretos (ex.: /termos#reembolso). */
+  id?: string;
 }
 
 export const privacyPolicy: { updatedAt: string; sections: LegalSection[] } = {
@@ -95,7 +97,7 @@ export const privacyPolicy: { updatedAt: string; sections: LegalSection[] } = {
 };
 
 export const termsOfUse: { updatedAt: string; sections: LegalSection[] } = {
-  updatedAt: '25/10/2026',
+  updatedAt: '05/11/2026',
   sections: [
     {
       heading: '1. Natureza do serviço',
@@ -135,14 +137,25 @@ export const consultantTerms: { version: string; sections: LegalSection[] } = {
       heading: 'Assinatura e renovação',
       paragraphs: [
         'A assinatura é mensal, renovada automaticamente pelo provedor de pagamento até o cancelamento. O acesso pago é liberado somente após a confirmação do pagamento pelo provedor (webhook). Em caso de falha na renovação, há carência de 3 dias; depois, o acesso às oportunidades é suspenso.',
-        'O cancelamento interrompe as renovações futuras; o acesso permanece até o fim do ciclo pago, conforme a política comercial [validar regra de reembolso/arrependimento com o jurídico].',
+        'O cancelamento interrompe as renovações futuras; o acesso permanece até o fim do ciclo já pago. As regras de reembolso estão na seção "Cancelamento e reembolso".',
       ],
     },
     {
-      heading: 'Limites e disponibilidade',
+      id: 'reembolso',
+      heading: 'Cancelamento e reembolso',
       paragraphs: [
-        'O limite do plano é o máximo de reivindicações por ciclo mensal, condicionado à disponibilidade real de oportunidades compatíveis. Não há promessa de quantidade diária ou mensal de leads, nem garantia de vendas.',
-        'Alterações de preço e limite comunicadas pela plataforma passam a valer na renovação seguinte.',
+        'Prazo de arrependimento: você pode desistir da assinatura em até 7 (sete) dias corridos contados da contratação, ou seja, da confirmação do primeiro pagamento, e receber o reembolso integral do valor pago, conforme o art. 49 do Código de Defesa do Consumidor. Para pedir, use o menu Suporte do painel ou escreva para o e-mail de contato informado no site. O estorno é feito pelo mesmo meio de pagamento, por meio do Mercado Pago, e o acesso às oportunidades é encerrado na data do pedido.',
+        'Depois de 7 dias não há reembolso, total ou proporcional, dos valores já pagos, inclusive pelo período não utilizado do ciclo, pela quantidade de pedidos recebidos ou pelo resultado comercial obtido. O prazo de 7 dias vale para a contratação e não é reaberto a cada renovação mensal.',
+        'Você pode cancelar a renovação automática a qualquer momento, pelo painel ou pelo Mercado Pago. O cancelamento impede novas cobranças e o acesso continua até o fim do ciclo já pago.',
+        'Sem garantia de volume nem de vendas: os planos não têm teto de reivindicações, mas a quantidade de pedidos é apenas uma estimativa e depende da demanda real de pessoas na sua região e modalidade, compatível com os filtros do seu plano. A plataforma não garante quantidade mínima de pedidos, taxa de resposta, fechamento de vendas nem faturamento.',
+        'Pedidos inválidos (telefone ou e-mail inválido, duplicado, fora da região ou cujo titular nega ter pedido contato) podem ser contestados em até 7 dias, conforme a seção "Contestação de leads". A contestação aceita é compensada com a devolução da reivindicação e não gera reembolso em dinheiro.',
+      ],
+    },
+    {
+      heading: 'Volume de pedidos e disponibilidade',
+      paragraphs: [
+        'Os planos não têm teto de reivindicações por ciclo mensal. As oportunidades dependem da disponibilidade real de pedidos compatíveis com sua região, modalidade e filtros, e qualquer volume informado é uma estimativa. Não há promessa de quantidade diária ou mensal de pedidos, nem garantia de vendas.',
+        'Alterações de preço e regras comunicadas pela plataforma passam a valer na renovação seguinte.',
       ],
     },
     {

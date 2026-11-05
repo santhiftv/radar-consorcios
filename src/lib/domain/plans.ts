@@ -96,7 +96,9 @@ export function visibleAt(publishedAt: Date, plan: Pick<PlanRules, 'priorityDela
 export const HIGH_URGENCY_MIN = 8;
 
 export function describeClaimLimit(plan: Pick<PlanRules, 'claimLimit' | 'claimsUnlimited'>): string {
-  return plan.claimsUnlimited ? 'Leads sem limite por ciclo mensal' : `Até ${plan.claimLimit} leads por ciclo mensal`;
+  return plan.claimsUnlimited
+    ? 'Pedidos sem limite · volume estimado conforme a demanda'
+    : `Até ${plan.claimLimit} pedidos por ciclo · volume conforme a demanda`;
 }
 
 export function planReceivesUrgency(plan: Pick<PlanRules, 'maxLeadUrgency'>, urgency: number): boolean {
