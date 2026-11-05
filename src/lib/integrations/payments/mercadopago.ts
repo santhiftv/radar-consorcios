@@ -11,6 +11,7 @@
  *    HMAC-SHA256 usando a "assinatura secreta" configurada no painel.
  */
 import { createHmac, timingSafeEqual } from 'node:crypto';
+import { siteConfig } from '@/config/site';
 import {
   PaymentProviderError,
   type CheckoutRequest,
@@ -132,7 +133,7 @@ export function createMercadoPagoProvider(opts: MercadoPagoOptions): PaymentProv
         'POST',
         '/preapproval',
         {
-          reason: `Consórcio Intel — Plano ${req.planName}`,
+          reason: `${siteConfig.name} — Plano ${req.planName}`,
           external_reference: req.subscriptionId,
           payer_email: req.payerEmail,
           back_url: req.backUrl,

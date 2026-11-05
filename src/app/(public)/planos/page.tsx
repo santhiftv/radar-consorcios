@@ -31,7 +31,7 @@ export default async function PlanosPage() {
           decoding="async"
           className="aspect-[20/13] w-full rounded-3xl object-cover shadow-[var(--shadow-card)]"
         />
-        <figcaption className="text-muted"><p className="mt-1.5 text-right text-[11px] opacity-70">Foto: <a href="https://unsplash.com/@silverkblack?utm_source=consorcio_intel&utm_medium=referral" target="_blank" rel="noopener noreferrer" className="underline">Vitaly Gariev</a> / <a href="https://unsplash.com/?utm_source=consorcio_intel&utm_medium=referral" target="_blank" rel="noopener noreferrer" className="underline">Unsplash</a></p></figcaption>
+        <figcaption className="text-muted"><p className="mt-1.5 text-right text-[11px] opacity-70">Foto: <a href="https://unsplash.com/@silverkblack?utm_source=radar_consorcios&utm_medium=referral" target="_blank" rel="noopener noreferrer" className="underline">Vitaly Gariev</a> / <a href="https://unsplash.com/?utm_source=radar_consorcios&utm_medium=referral" target="_blank" rel="noopener noreferrer" className="underline">Unsplash</a></p></figcaption>
         </figure>
       </div>
       <ol className="mt-8 flex flex-wrap gap-2 text-sm">
