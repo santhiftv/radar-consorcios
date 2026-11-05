@@ -365,6 +365,69 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Para consultores */}
+      <section id="para-consultores" className="scroll-mt-20 border-y border-line bg-navy-50 py-16">
+        <div className="container-page grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-wider text-brand-green">
+              Para consultores de consórcio
+            </p>
+            <h2 className="mt-3 text-3xl font-extrabold text-navy-900 sm:text-4xl">
+              Receba oportunidades autorizadas da sua região
+            </h2>
+            <p className="mt-4 text-navy-900">
+              Pessoas que preencheram o formulário aqui no Radar e autorizaram o contato. Você escolhe o plano, cria sua
+              conta e acessa o painel com usuário e senha próprios — vê só os leads a você atribuídos, com urgência,
+              modalidade e região.
+            </p>
+            <ul className="mt-6 grid gap-2 text-sm text-navy-900 sm:grid-cols-2">
+              <li className="flex items-start gap-2">
+                <span aria-hidden className="mt-0.5 text-brand-green">✓</span>
+                Leads com urgência informada pela pessoa (0 a 10)
+              </li>
+              <li className="flex items-start gap-2">
+                <span aria-hidden className="mt-0.5 text-brand-green">✓</span>
+                Filtros por modalidade, cidade e administradora
+              </li>
+              <li className="flex items-start gap-2">
+                <span aria-hidden className="mt-0.5 text-brand-green">✓</span>
+                Painel com desempenho, histórico e assinatura
+              </li>
+              <li className="flex items-start gap-2">
+                <span aria-hidden className="mt-0.5 text-brand-green">✓</span>
+                Cobrança mensal via Mercado Pago
+              </li>
+            </ul>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <ButtonLink href="/planos" size="lg">
+                Ver planos e método
+              </ButtonLink>
+              <ButtonLink href="/entrar" size="lg" variant="secondary">
+                Já sou consultor — entrar
+              </ButtonLink>
+            </div>
+          </div>
+          <ol className="grid gap-3">
+            {[
+              ['Escolha o plano', 'Básico, Médio ou Mais caro — com limite de reivindicações e regras claras.'],
+              ['Crie sua conta', 'Cadastro com e-mail e senha, confirmação do e-mail e perfil profissional.'],
+              ['Pague no Mercado Pago', 'Assinatura mensal recorrente, sem fidelidade.'],
+              ['Acesse o painel', 'Veja novos leads da sua região, reivindique e acompanhe desempenho.'],
+            ].map(([t, d], i) => (
+              <li key={t} className="card flex items-start gap-4 p-5">
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-navy-900 font-display font-bold text-white">
+                  {i + 1}
+                </span>
+                <div>
+                  <h3 className="text-base font-bold text-navy-900">{t}</h3>
+                  <p className="mt-1 text-sm text-muted">{d}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
       {/* Dúvidas */}
       <section className="container-page py-16">
         <SectionHeading eyebrow="Dúvidas" title="Perguntas frequentes" />
