@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from 'react';
 
-function b64urlToUint8(s: string): Uint8Array {
+function b64urlToArrayBuffer(s: string): ArrayBuffer {
   const pad = s.length % 4 ? '='.repeat(4 - (s.length % 4)) : '';
   const base64 = (s + pad).replace(/-/g, '+').replace(/_/g, '/');
   const raw = atob(base64);
-  const out = new Uint8Array(raw.length);
-  for (let i = 0; i < raw.length; i++) out[i] = raw.charCodeAt(i);
-  return out;
+  const buf = new ArrayBuffer(raw.length);
+  const view = new Uint8Array(buf);
+  for (let i = 0; i < raw.length; i++) view[i] = raw.charCodeAt(i);
+  return buf;
 }
 
 type State = 'idle' | 'unsupported' | 'blocked' | 'enabled' | 'error';
@@ -48,7 +49,7 @@ export function EnablePushButton({ vapidPublicKey }: { vapidPublicKey?: string }
       if (!sub) {
         sub = await reg.pushManager.subscribe({
           userVisibleOnly: true,
-          applicationServerKey: b64urlToUint8(vapidPublicKey),
+          applicationServerKey: b64urlToArrayBuffer(vapidPublicKey),
         });
       }
       const json = sub.toJSON();

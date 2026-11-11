@@ -9,11 +9,15 @@ export async function POST(req: Request) {
   const { data } = await supabase.auth.getUser();
   if (!data.user) return json(401, { error: 'Faça login.' });
 
-  const body = await readJson(req, 4_000);
-  const endpoint = typeof body?.endpoint === 'string' ? body.endpoint : '';
-  const p256dh = typeof body?.keys?.p256dh === 'string' ? body.keys.p256dh : '';
-  const auth = typeof body?.keys?.auth === 'string' ? body.keys.auth : '';
-  const userAgent = typeof body?.userAgent === 'string' ? body.userAgent.slice(0, 500) : null;
+  const raw = (await readJson(req, 4_000)) as {
+    endpoint?: unknown;
+    keys?: { p256dh?: unknown; auth?: unknown };
+    userAgent?: unknown;
+  } | null;
+  const endpoint = typeof raw?.endpoint === 'string' ? raw.endpoint : '';
+  const p256dh = typeof raw?.keys?.p256dh === 'string' ? raw.keys.p256dh : '';
+  const auth = typeof raw?.keys?.auth === 'string' ? raw.keys.auth : '';
+  const userAgent = typeof raw?.userAgent === 'string' ? raw.userAgent.slice(0, 500) : null;
   if (!endpoint || !p256dh || !auth) return json(400, { error: 'subscription inválida' });
 
   const { error } = await supabase.from('push_subscriptions').upsert(

@@ -9,8 +9,8 @@ export async function POST(req: Request) {
   const { data } = await supabase.auth.getUser();
   if (!data.user) return json(401, { error: 'Faça login.' });
 
-  const body = await readJson(req, 2_000);
-  const endpoint = typeof body?.endpoint === 'string' ? body.endpoint : '';
+  const raw = (await readJson(req, 2_000)) as { endpoint?: unknown } | null;
+  const endpoint = typeof raw?.endpoint === 'string' ? raw.endpoint : '';
   if (!endpoint) return json(400, { error: 'endpoint ausente' });
   await supabase.from('push_subscriptions').update({ active: false }).match({ user_id: data.user.id, endpoint });
   return json(200, { ok: true });
