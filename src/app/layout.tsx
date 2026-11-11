@@ -22,6 +22,7 @@ export const metadata: Metadata = {
     description: siteConfig.description,
   },
   twitter: { card: 'summary_large_image', title: siteConfig.name, description: siteConfig.description },
+  manifest: '/manifest.webmanifest',
   robots: process.env.NEXT_PUBLIC_SITE_INDEXING === 'off' ? { index: false, follow: false } : { index: true, follow: true },
   verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
     ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }

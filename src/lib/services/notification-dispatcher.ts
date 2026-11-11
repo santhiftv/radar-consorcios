@@ -5,11 +5,12 @@
  */
 import type { EmailSender } from '../integrations/email/resend.ts';
 import { notificationEmail } from '../integrations/email/templates.ts';
+import { sendWebPush, type PushSubscriptionInput } from '../integrations/webpush.ts';
 import { silentLogger, type Logger, type Rpc } from './types.ts';
 
 export interface DueDelivery {
   delivery_id: string;
-  channel: 'email' | 'inapp';
+  channel: 'email' | 'inapp' | 'push';
   attempts: number;
   notification_id: string;
   recipient_id: string;
@@ -28,6 +29,7 @@ export interface DispatcherDeps {
   email: EmailSender;
   siteUrl: string;
   brand: string;
+  vapid?: { publicKey: string; privateKey: string; subject: string };
   batchSize?: number;
   maxBatches?: number;
   logger?: Logger;
@@ -65,6 +67,44 @@ export async function dispatchDueNotifications(deps: DispatcherDeps): Promise<Di
         err = 'lead_no_longer_available';
       } else if (item.channel === 'inapp') {
         outcome = 'sent'; // a notificação já está no banco; o "envio" é o broadcast em tempo real
+      } else if (item.channel === 'push') {
+        if (!deps.vapid) {
+          outcome = 'skipped';
+          err = 'vapid_not_configured';
+        } else {
+          const subsRes = await deps.rpc<Array<PushSubscriptionInput & { id: string }>>('list_push_subscriptions', {
+            p_user: item.recipient_id,
+          });
+          const subs = subsRes.data ?? [];
+          if (subs.length === 0) {
+            outcome = 'skipped';
+            err = 'no_push_subscriptions';
+          } else {
+            let anyOk = false;
+            let lastErr: string | null = null;
+            for (const s of subs) {
+              const r = await sendWebPush(
+                { endpoint: s.endpoint, p256dh: s.p256dh, auth: s.auth },
+                {
+                  title: item.title,
+                  body: item.body,
+                  tag: `lead-${item.lead_id ?? item.notification_id}`,
+                  url: item.lead_id ? `/painel/novos-leads?lead=${item.lead_id}` : '/painel',
+                  urgent: item.type === 'new_lead',
+                },
+                { publicKeyB64: deps.vapid.publicKey, privateKeyB64: deps.vapid.privateKey, subject: deps.vapid.subject },
+              );
+              if (r.ok) anyOk = true;
+              else if (r.gone) await deps.rpc('deactivate_push_subscription', { p_id: s.id });
+              else lastErr = `push_${r.status}${r.error ? `:${r.error.slice(0, 80)}` : ''}`;
+            }
+            if (anyOk) outcome = 'sent';
+            else {
+              outcome = 'failed';
+              err = lastErr ?? 'push_all_gone';
+            }
+          }
+        }
       } else if (!item.recipient_email) {
         outcome = 'skipped';
         err = 'recipient_without_email';

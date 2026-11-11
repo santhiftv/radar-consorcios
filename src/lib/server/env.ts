@@ -30,6 +30,9 @@ export const serverEnv = {
   aiApiKey: first('AI_API_KEY'),
   aiModel: first('AI_MODEL'),
   aiWebSearchTool: first('AI_WEB_SEARCH_TOOL'),
+  vapidPublicKey: first('VAPID_PUBLIC_KEY', 'NEXT_PUBLIC_VAPID_PUBLIC_KEY'),
+  vapidPrivateKey: first('VAPID_PRIVATE_KEY'),
+  vapidSubject: first('VAPID_SUBJECT') ?? 'mailto:contato@radarconsorcios.com.br',
 };
 
 /** Diagnóstico exibido no painel admin (sem revelar valores). */

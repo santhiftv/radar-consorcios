@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { markNotificationsReadAction } from './actions';
 import { Alert, Badge, ButtonLink, Card, PageTitle, Stat, formatDateTime } from '@/components/ui';
 import { TokenBalanceCard } from '@/components/panel/token-balance-card';
+import { EnablePushButton } from '@/components/panel/enable-push';
 import { requireConsultant } from '@/lib/auth/guards';
 import { SUBSCRIPTION_STATUS, VERIFICATION_STATUS } from '@/lib/labels';
 
@@ -61,8 +62,9 @@ export default async function PainelHome({ searchParams }: { searchParams: Promi
       )}
 
       {usage.active && (
-        <div className="mb-4">
+        <div className="mb-4 grid gap-4 lg:grid-cols-[1.4fr_1fr]">
           <TokenBalanceCard balance={tokens} />
+          <EnablePushButton vapidPublicKey={process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY} />
         </div>
       )}
 
