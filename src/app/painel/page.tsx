@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { markNotificationsReadAction } from './actions';
 import { Alert, Badge, ButtonLink, Card, PageTitle, Stat, formatDateTime } from '@/components/ui';
+import { TokenBalanceCard } from '@/components/panel/token-balance-card';
 import { requireConsultant } from '@/lib/auth/guards';
 import { SUBSCRIPTION_STATUS, VERIFICATION_STATUS } from '@/lib/labels';
 
@@ -20,13 +21,20 @@ interface Usage {
 export default async function PainelHome({ searchParams }: { searchParams: Promise<{ senha?: string }> }) {
   const { senha } = await searchParams;
   const { supabase, profile } = await requireConsultant();
-  const [usageRes, available, assignments, notifications] = await Promise.all([
+  const [usageRes, available, assignments, notifications, tokenRes] = await Promise.all([
     supabase.rpc('consultant_usage'),
     supabase.rpc('list_available_leads', { p_limit: 100 }),
     supabase.from('lead_assignments').select('status, claimed_at, subscription_id'),
     supabase.from('notifications').select('id, title, body, type, created_at, read_at, lead_id').order('visible_at', { ascending: false }).limit(8),
+    supabase.rpc('token_balance'),
   ]);
   const usage = (usageRes.data ?? { active: false }) as Usage;
+  const tokens = (tokenRes.data ?? { weekly_balance: 0, weekly_quota: 0, extra_balance: 0 }) as {
+    weekly_balance: number;
+    weekly_quota: number;
+    extra_balance: number;
+    next_reset_at: string;
+  };
   const rows = (assignments.data ?? []) as Array<{ status: string; claimed_at: string }>;
   const contacted = rows.filter((r) => ['contacted', 'converted', 'lost'].includes(r.status)).length;
   const converted = rows.filter((r) => r.status === 'converted').length;
@@ -50,6 +58,12 @@ export default async function PainelHome({ searchParams }: { searchParams: Promi
         <Alert tone="warn" className="mb-4" title="Pagamento não confirmado">
           Seu acesso continua até {formatDateTime(usage.grace_until)}. Atualize o pagamento no Mercado Pago.
         </Alert>
+      )}
+
+      {usage.active && (
+        <div className="mb-4">
+          <TokenBalanceCard balance={tokens} />
+        </div>
       )}
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">

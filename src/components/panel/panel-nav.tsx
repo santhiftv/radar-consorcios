@@ -11,6 +11,7 @@ export const PANEL_TABS = [
   { href: '/painel/preferencias', label: 'Filtros e preferências' },
   { href: '/painel/desempenho', label: 'Desempenho' },
   { href: '/painel/assinatura', label: 'Plano e assinatura' },
+  { href: '/painel/tokens', label: 'Tokens e saldo' },
   { href: '/painel/perfil', label: 'Perfil e segurança' },
   { href: '/painel/suporte', label: 'Suporte' },
 ];

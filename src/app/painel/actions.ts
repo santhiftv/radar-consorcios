@@ -98,6 +98,8 @@ const CLAIM_MESSAGES: Record<string, string> = {
   profile_blocked: 'Seu perfil está bloqueado para reivindicações. Fale com o suporte.',
   rate_limited: 'Muitas tentativas seguidas. Aguarde um minuto.',
   not_found: 'Oportunidade não encontrada.',
+  insufficient_tokens: 'Você está sem tokens. Aguarde a cota semanal ou compre tokens avulsos em Tokens e saldo.',
+  premium_only: 'Oportunidade exclusiva do plano Premium (alta urgência).',
 };
 
 export async function claimLeadAction(leadId: string): Promise<ActionState & { assignmentId?: string }> {

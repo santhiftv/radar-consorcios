@@ -29,6 +29,8 @@ export interface WebhookDeps {
 
 const PREAPPROVAL_TYPES = new Set(['subscription_preapproval', 'preapproval']);
 const PAYMENT_TYPES = new Set(['subscription_authorized_payment', 'authorized_payment']);
+const ONE_TIME_PAYMENT_TYPES = new Set(['payment']);
+const TOKEN_EXT_REF_PREFIX = 'tokens:';
 
 export async function handlePaymentWebhook(
   req: { url: URL; headers: Headers; rawBody: string },
@@ -136,6 +138,31 @@ export async function handlePaymentWebhook(
       if (applied.error) throw new Error(`apply_failed:${applied.error.code ?? ''}`);
       await finish('processed', null, row.id);
       return { status: 200, body: { processed: true } };
+    }
+
+    if (ONE_TIME_PAYMENT_TYPES.has(env.type) && deps.provider.getPayment) {
+      const payment = await deps.provider.getPayment(env.resourceId!);
+      const extRef = payment.externalReference ?? '';
+      if (!extRef.startsWith(TOKEN_EXT_REF_PREFIX)) {
+        await finish('ignored', 'not_token_payment', null);
+        return { status: 200, body: { ignored: true } };
+      }
+      const purchaseId = extRef.slice(TOKEN_EXT_REF_PREFIX.length);
+      if (!/^[0-9a-f-]{36}$/i.test(purchaseId)) {
+        await finish('ignored', 'invalid_purchase_id', null);
+        return { status: 200, body: { ignored: true } };
+      }
+      if (payment.status !== 'approved') {
+        await finish('ignored', `token_payment_${payment.status ?? 'unknown'}`, null);
+        return { status: 200, body: { ignored: true } };
+      }
+      const credited = await deps.rpc<boolean>('credit_token_purchase', {
+        p_purchase_id: purchaseId,
+        p_payment_id: payment.id,
+      });
+      if (credited.error) throw new Error(`credit_failed:${credited.error.code ?? ''}`);
+      await finish('processed', null, null);
+      return { status: 200, body: { processed: true, kind: 'token_purchase', credited: credited.data === true } };
     }
 
     await finish('ignored', `unhandled_type_${env.type}`, null);

@@ -45,11 +45,35 @@ export interface WebhookVerification {
   reason?: string;
 }
 
+export interface OneTimeCheckoutRequest {
+  purchaseId: string; // id interno (vai como external_reference)
+  title: string;
+  priceCents: number;
+  payerEmail: string;
+  backUrl: string;
+  /** Prefixo do external_reference, ex.: "tokens:<uuid>". */
+  externalReferencePrefix?: string;
+}
+
+export interface OneTimeCheckoutResult {
+  providerPreferenceId: string;
+  checkoutUrl: string;
+}
+
+export interface ProviderPayment {
+  id: string;
+  status: string | null; // approved, rejected, pending...
+  externalReference: string | null; // ex.: "tokens:<uuid>"
+  amountCents: number | null;
+}
+
 export interface PaymentProvider {
   readonly name: 'mercadopago' | string;
   createSubscriptionCheckout(req: CheckoutRequest): Promise<CheckoutResult>;
+  createOneTimeCheckout(req: OneTimeCheckoutRequest): Promise<OneTimeCheckoutResult>;
   getSubscription(providerSubscriptionId: string): Promise<ProviderSubscription>;
   getRecurringPayment(paymentId: string): Promise<ProviderRecurringPayment>;
+  getPayment(paymentId: string): Promise<ProviderPayment>;
   cancelSubscription(providerSubscriptionId: string): Promise<void>;
   verifyWebhook(input: { headers: Headers; url: URL; rawBody: string }): WebhookVerification;
   parseWebhook(input: { url: URL; body: unknown; headers: Headers }): WebhookEnvelope | null;

@@ -187,6 +187,49 @@ export function createMercadoPagoProvider(opts: MercadoPagoOptions): PaymentProv
       await call('PUT', `/preapproval/${encodeURIComponent(id)}`, { status: 'cancelled' });
     },
 
+    async createOneTimeCheckout(req): Promise<{ providerPreferenceId: string; checkoutUrl: string }> {
+      const extRef = `${req.externalReferencePrefix ?? ''}${req.purchaseId}`;
+      const data = await call<{ id: string; init_point?: string; sandbox_init_point?: string }>(
+        'POST',
+        '/checkout/preferences',
+        {
+          items: [
+            {
+              title: req.title,
+              quantity: 1,
+              currency_id: 'BRL',
+              unit_price: Math.round(req.priceCents) / 100,
+            },
+          ],
+          external_reference: extRef,
+          payer: { email: req.payerEmail },
+          back_urls: { success: req.backUrl, pending: req.backUrl, failure: req.backUrl },
+          auto_return: 'approved',
+          statement_descriptor: 'RadarConsorcios',
+          metadata: { purchase_id: req.purchaseId, kind: 'tokens' },
+        },
+        req.purchaseId,
+      );
+      const url = data.init_point ?? data.sandbox_init_point;
+      if (!data.id || !url) throw new PaymentProviderError('Resposta do Mercado Pago sem id/init_point', 502, true);
+      return { providerPreferenceId: data.id, checkoutUrl: url };
+    },
+
+    async getPayment(id: string) {
+      const d = await call<{
+        id: number | string;
+        status?: string;
+        external_reference?: string;
+        transaction_amount?: number;
+      }>('GET', `/v1/payments/${encodeURIComponent(id)}`);
+      return {
+        id: String(d.id),
+        status: d.status ?? null,
+        externalReference: d.external_reference ?? null,
+        amountCents: typeof d.transaction_amount === 'number' ? Math.round(d.transaction_amount * 100) : null,
+      };
+    },
+
     verifyWebhook({ headers, url, rawBody }): WebhookVerification {
       let body: unknown = null;
       try {

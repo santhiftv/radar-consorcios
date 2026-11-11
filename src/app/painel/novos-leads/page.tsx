@@ -51,13 +51,22 @@ function toUpsell(p: PublicPlan): UpsellPlan {
 export default async function NovosLeadsPage({ searchParams }: { searchParams: Promise<{ lead?: string }> }) {
   const { lead: highlighted } = await searchParams;
   const { supabase } = await requireConsultant();
-  const [{ data: usage }, { data, error }, { data: lockedData }, plans] = await Promise.all([
+  const [{ data: usage }, { data, error }, { data: lockedData }, plans, { data: tokenData }] = await Promise.all([
     supabase.rpc('consultant_usage'),
     supabase.rpc('list_available_leads', { p_limit: 100 }),
     supabase.rpc('list_locked_urgent_leads', { p_limit: 20 }),
     getPlans(),
+    supabase.rpc('token_balance'),
   ]);
   const u = (usage ?? {}) as { active?: boolean; remaining?: number | null; unlimited?: boolean; plan_code?: string };
+  const tokens = (tokenData ?? { weekly_balance: 0, extra_balance: 0 }) as {
+    weekly_balance: number;
+    weekly_quota: number;
+    extra_balance: number;
+    next_reset_at: string;
+  };
+  const totalTokens = tokens.weekly_balance + tokens.extra_balance;
+  const noTokens = u.active && totalTokens <= 0;
   const topPlan = [...plans].sort((a, b) => b.maxLeadUrgency - a.maxLeadUrgency || b.priceCents - a.priceCents)[0];
   const currentPlan = plans.find((p) => p.code === u.plan_code) ?? null;
   const locked = topPlan && u.plan_code !== topPlan.code ? ((lockedData ?? []) as LockedLead[]) : [];
@@ -69,6 +78,15 @@ export default async function NovosLeadsPage({ searchParams }: { searchParams: P
       <PageTitle title="Novos leads" description="Resumo das oportunidades compatíveis. O contato é liberado somente para quem concluir a reivindicação." />
       {!u.active && <Alert tone="warn" className="mb-4">Ative um plano para ver e reivindicar oportunidades. <Link className="underline" href="/painel/assinatura">Plano e assinatura</Link></Alert>}
       {noBalance && <Alert tone="warn" className="mb-4">Seu saldo de reivindicações deste ciclo acabou. Ele renova no próximo ciclo.</Alert>}
+      {u.active && (
+        <Alert tone={noTokens ? 'warn' : 'neutral'} className="mb-4" title={noTokens ? 'Sem tokens disponíveis' : `${totalTokens} token(s) disponíveis`}>
+          {noTokens ? (
+            <>Sua cota semanal zerou. Você ainda vê os leads, mas só reivindica depois que a cota reseta na segunda-feira — ou comprando tokens avulsos em <Link className="underline" href="/painel/tokens">Tokens e saldo</Link>.</>
+          ) : (
+            <>Você tem <strong>{tokens.weekly_balance}</strong> da cota semanal e <strong>{tokens.extra_balance}</strong> extras. Cada reivindicação consome 1 token.</>
+          )}
+        </Alert>
+      )}
       {error && <Alert tone="danger" className="mb-4">Não foi possível carregar as oportunidades.</Alert>}
       {locked.length > 0 && topPlan && (
         <section aria-labelledby="urgentes" className="mb-6 rounded-2xl border border-warn/30 bg-warn-soft p-4 sm:p-5">
@@ -124,7 +142,11 @@ export default async function NovosLeadsPage({ searchParams }: { searchParams: P
                   </dl>
                   <p className="mt-2 text-xs text-muted">Publicado {formatDateTime(l.published_at)} · disponível até {formatDateTime(l.available_until)}</p>
                 </div>
-                <ClaimButton leadId={l.lead_id} disabled={noBalance} disabledReason={noBalance ? 'Saldo esgotado neste ciclo' : undefined} />
+                <ClaimButton
+                  leadId={l.lead_id}
+                  disabled={noBalance || noTokens}
+                  disabledReason={noBalance ? 'Saldo esgotado neste ciclo' : noTokens ? 'Sem tokens — compre em Tokens e saldo ou aguarde o reset semanal' : undefined}
+                />
               </Card>
             </li>
           ))}
