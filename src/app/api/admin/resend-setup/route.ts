@@ -4,8 +4,7 @@
  * o domínio e retorna os registros DNS que precisam ser criados no Registro.br,
  * PUT dispara verificação.
  */
-import { isAuthorizedCron } from '@/lib/services/cron-auth';
-import { serverEnv } from '@/lib/server/env';
+import { timingSafeEqual } from 'node:crypto';
 import { json } from '@/lib/server/http';
 
 export const runtime = 'nodejs';
@@ -32,7 +31,13 @@ async function resend(method: string, path: string, body?: unknown) {
 }
 
 function auth(req: Request) {
-  return isAuthorizedCron(req.headers.get('authorization'), serverEnv.cronSecret);
+  const token = process.env.ADMIN_SETUP_TOKEN;
+  if (!token || token.length < 16) return false;
+  const hdr = req.headers.get('authorization');
+  if (!hdr) return false;
+  const expected = Buffer.from(`Bearer ${token}`);
+  const got = Buffer.from(hdr);
+  return expected.length === got.length && timingSafeEqual(expected, got);
 }
 
 export async function GET(req: Request) {
