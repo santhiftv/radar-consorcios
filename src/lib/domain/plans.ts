@@ -22,6 +22,8 @@ export interface PlanRules {
   priorityDelaySeconds: number;
   reportLevel: 'basic' | 'full' | 'advanced';
   supportLevel: 'standard' | 'priority';
+  /** Tokens que o plano concede toda segunda-feira. 1 token = 1 reivindicação. */
+  weeklyTokens?: number;
 }
 
 export interface PreferencesInput {
@@ -95,7 +97,10 @@ export function visibleAt(publishedAt: Date, plan: Pick<PlanRules, 'priorityDela
 /** Leads com urgência a partir deste valor são exclusivos do plano que aceita urgência 10. */
 export const HIGH_URGENCY_MIN = 8;
 
-export function describeClaimLimit(plan: Pick<PlanRules, 'claimLimit' | 'claimsUnlimited'>): string {
+export function describeClaimLimit(plan: Pick<PlanRules, 'claimLimit' | 'claimsUnlimited' | 'weeklyTokens'>): string {
+  if (plan.weeklyTokens && plan.weeklyTokens > 0) {
+    return `${plan.weeklyTokens} ${plan.weeklyTokens === 1 ? 'token' : 'tokens'}/semana · reset toda segunda-feira`;
+  }
   return plan.claimsUnlimited
     ? 'Pedidos sem limite · volume estimado conforme a demanda'
     : `Até ${plan.claimLimit} pedidos por ciclo · volume conforme a demanda`;

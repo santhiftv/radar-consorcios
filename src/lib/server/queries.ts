@@ -74,6 +74,7 @@ export async function getPlans(): Promise<PublicPlan[]> {
     priorityDelaySeconds: p.priority_delay_seconds,
     reportLevel: p.report_level,
     supportLevel: p.support_level,
+    weeklyTokens: p.weekly_tokens ?? 0,
     features: Array.isArray(p.features) ? p.features : [],
   }));
 }

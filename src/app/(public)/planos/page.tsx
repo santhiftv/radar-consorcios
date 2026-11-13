@@ -66,7 +66,7 @@ export default async function PlanosPage() {
           <div className="rounded-xl bg-white p-4">
             <p className="text-xs font-semibold uppercase tracking-wider text-muted">Personalizado (anúncios)</p>
             <p className="mt-1 text-2xl font-extrabold text-navy-900">Leads direto</p>
-            <p className="mt-1 text-sm text-muted">Verba de anúncios + taxa de administração R$ 800 (verba até R$ 3.000; acima disso, 10% da verba). Os leads gerados pela sua verba vão direto para você.</p>
+            <p className="mt-1 text-sm text-muted">Investimento em anúncios + taxa de administração R$ 800 (até R$ 3.000; acima disso, R$ 800 + 10% do valor). Os leads gerados pelo seu investimento vão direto para você.</p>
           </div>
         </div>
         <ul className="mt-6 grid gap-2 text-sm text-navy-900 md:grid-cols-2">

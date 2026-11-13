@@ -74,18 +74,30 @@ export function PlansGrid({ plans, compact = false }: { plans: PublicPlan[]; com
             <h3 className="text-xl font-bold">{p.name}</h3>
             {isOpen ? (
               <>
-                <p className="mt-3">
-                  <span className="font-display text-2xl font-extrabold text-navy-900">Verba + taxa</span>
+                <Badge tone="green" className="absolute -top-3 right-6">Sob medida</Badge>
+                <p className="mt-3 font-display text-3xl font-extrabold text-navy-900">
+                  Investimento <span className="text-brand-green">+</span> taxa
                 </p>
-                <p className="mt-2 text-sm font-semibold text-brand-green-dark">Leads gerados pela sua verba vão direto para você</p>
+                <p className="mt-2 text-sm font-semibold text-brand-green-dark">
+                  Leads do seu anúncio chegam direto para você
+                </p>
                 {!compact && (
-                  <ul className="mt-5 space-y-2 text-sm text-navy-900">
-                    <li className="flex gap-2"><span aria-hidden className="mt-0.5 text-brand-green">✓</span>Você define a verba mensal de anúncios (mínimo recomendado R$ 500)</li>
-                    <li className="flex gap-2"><span aria-hidden className="mt-0.5 text-brand-green">✓</span>Taxa de administração: <strong>R$ 800</strong> para verba até R$ 3.000</li>
-                    <li className="flex gap-2"><span aria-hidden className="mt-0.5 text-brand-green">✓</span>Verba acima de R$ 3.000: taxa R$ 800 + 10% do valor total</li>
-                    <li className="flex gap-2"><span aria-hidden className="mt-0.5 text-brand-green">✓</span>Sem cota semanal e sem tokens: os leads chegam direto a você</li>
-                    <li className="flex gap-2"><span aria-hidden className="mt-0.5 text-brand-green">✓</span>Criativos, segmentação e relatórios mensais incluídos</li>
-                  </ul>
+                  <div className="mt-5 space-y-3 text-sm text-navy-900">
+                    <div className="rounded-xl border border-line bg-navy-50 p-3">
+                      <p className="text-xs font-semibold uppercase tracking-wider text-muted">Taxa de administração</p>
+                      <p className="mt-1 text-navy-900">
+                        <strong>R$ 800</strong> para investimento até R$ 3.000
+                      </p>
+                      <p className="text-navy-900">
+                        <strong>R$ 800 + 10%</strong> do investimento, se acima de R$ 3.000
+                      </p>
+                    </div>
+                    <ul className="space-y-2">
+                      <li className="flex gap-2"><span aria-hidden className="mt-0.5 text-brand-green">✓</span>Você define o investimento mensal (recomendado a partir de R$ 500)</li>
+                      <li className="flex gap-2"><span aria-hidden className="mt-0.5 text-brand-green">✓</span>Sem cota semanal nem tokens: os leads são seus, sem disputa</li>
+                      <li className="flex gap-2"><span aria-hidden className="mt-0.5 text-brand-green">✓</span>Criativos, segmentação e relatórios mensais incluídos</li>
+                    </ul>
+                  </div>
                 )}
               </>
             ) : (
