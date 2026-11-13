@@ -10,7 +10,7 @@ export default async function SuportePage() {
   const { data } = await supabase.from('support_tickets').select('id, subject, message, status, priority, admin_reply, created_at, answered_at').order('created_at', { ascending: false }).limit(50);
   return (
     <>
-      <PageTitle title="Suporte" description="Abra um chamado. Assinantes Premium têm atendimento prioritário." />
+      <PageTitle title="Suporte" description="Abra um chamado. Assinantes Profissional têm atendimento prioritário." />
       <div className="grid gap-6 xl:grid-cols-[400px_minmax(0,1fr)]">
         <Card className="p-5">
           <h2 className="font-bold">Novo chamado</h2>

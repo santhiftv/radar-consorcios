@@ -33,7 +33,7 @@ export const consultantFaq = [
   },
   {
     q: 'Como funciona a prioridade entre os planos?',
-    a: 'Cada oportunidade é liberada em janelas: Premium no momento da publicação, Profissional 2 minutos depois e Essencial 5 minutos depois, se ainda estiver disponível. Dentro da janela, recebe quem concluir primeiro a reivindicação.',
+    a: 'Cada oportunidade é liberada em janelas: Profissional no momento da publicação e Básico 5 minutos depois, se ainda estiver disponível. Dentro da janela, recebe quem concluir primeiro a reivindicação. Leads gerados pela verba do plano Em aberto (anúncios) vão direto para o consultor que custeou.',
   },
   {
     q: 'E se o lead for inválido?',

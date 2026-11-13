@@ -99,7 +99,7 @@ const CLAIM_MESSAGES: Record<string, string> = {
   rate_limited: 'Muitas tentativas seguidas. Aguarde um minuto.',
   not_found: 'Oportunidade não encontrada.',
   insufficient_tokens: 'Você está sem tokens. Aguarde a cota semanal ou compre tokens avulsos em Tokens e saldo.',
-  premium_only: 'Oportunidade exclusiva do plano Premium (alta urgência).',
+  premium_only: 'Oportunidade exclusiva do plano superior (alta urgência).',
 };
 
 export async function claimLeadAction(leadId: string): Promise<ActionState & { assignmentId?: string }> {

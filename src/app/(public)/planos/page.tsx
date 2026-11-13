@@ -47,27 +47,26 @@ export default async function PlanosPage() {
       <p className="mt-4 text-sm text-muted">Preços e regras são condições comerciais iniciais e podem mudar; alterações valem a partir da renovação seguinte, com aviso prévio. O volume de pedidos é uma estimativa e não é garantido. Ao assinar, você concorda com os <Link href="/termos#consultor" className="underline">Termos do Consultor</Link>, incluindo a <Link href="/termos#reembolso" className="underline">política de cancelamento e reembolso</Link>.</p>
 
       <section className="mt-14 rounded-2xl border border-brand-green/20 bg-brand-green-soft p-6 sm:p-8">
-        <h2 className="text-2xl font-bold text-navy-900">Como o Radar gera e distribui os leads</h2>
+        <h2 className="text-2xl font-bold text-navy-900">Como a distribuição de leads funciona</h2>
         <p className="mt-2 max-w-3xl text-navy-900">
-          Parte da sua mensalidade vai para um pool de tráfego pago (Meta Ads e canais de aquisição) que gera as
-          oportunidades. Cada plano recebe uma cota semanal de <strong>tokens</strong> proporcional ao que contribui.
-          Para reivindicar um lead, você gasta 1 token.
+          Todos os consultores veem a vitrine de leads em aberto. Para reivindicar, você gasta 1 <strong>token</strong>.
+          Cada plano concede uma cota semanal; precisa de mais, compra pacotes avulsos.
         </p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <div className="rounded-xl bg-white p-4">
-            <p className="text-xs font-semibold uppercase tracking-wider text-muted">Essencial · R$ 197/mês</p>
-            <p className="mt-1 text-2xl font-extrabold text-navy-900">1 token/semana</p>
-            <p className="mt-1 text-sm text-muted">R$ 40 vão para o pool de tráfego pago.</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-muted">Básico · R$ 397/mês</p>
+            <p className="mt-1 text-2xl font-extrabold text-navy-900">2 tokens/semana</p>
+            <p className="mt-1 text-sm text-muted">Mesmo conteúdo do Profissional em menor escala: prioridade menor e menos filtros.</p>
           </div>
           <div className="rounded-xl bg-white p-4">
-            <p className="text-xs font-semibold uppercase tracking-wider text-muted">Profissional · R$ 297/mês</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-muted">Profissional · R$ 597/mês</p>
             <p className="mt-1 text-2xl font-extrabold text-navy-900">3 tokens/semana</p>
-            <p className="mt-1 text-sm text-muted">R$ 100 vão para o pool de tráfego pago.</p>
+            <p className="mt-1 text-sm text-muted">Mais filtros, mais regiões e janela de prioridade menor.</p>
           </div>
           <div className="rounded-xl bg-white p-4">
-            <p className="text-xs font-semibold uppercase tracking-wider text-muted">Premium · R$ 497/mês</p>
-            <p className="mt-1 text-2xl font-extrabold text-navy-900">6 tokens/semana</p>
-            <p className="mt-1 text-sm text-muted">R$ 200 vão para o pool. Inclui leads de alta urgência (8–10).</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-muted">Em aberto (anúncios)</p>
+            <p className="mt-1 text-2xl font-extrabold text-navy-900">Leads direto</p>
+            <p className="mt-1 text-sm text-muted">Verba de anúncios + taxa de administração R$ 800 (verba até R$ 3.000; acima disso, 10% da verba). Os leads gerados pela sua verba vão direto para você.</p>
           </div>
         </div>
         <ul className="mt-6 grid gap-2 text-sm text-navy-900 md:grid-cols-2">
@@ -76,11 +75,6 @@ export default async function PlanosPage() {
           <li className="flex items-start gap-2"><span aria-hidden className="mt-0.5 text-brand-green">✓</span><span><strong>Pacotes avulsos.</strong> Precisa de mais? 3 tokens por R$ 49, 7 por R$ 99, 15 por R$ 199 — valem 30 dias.</span></li>
           <li className="flex items-start gap-2"><span aria-hidden className="mt-0.5 text-brand-green">✓</span><span><strong>Reembolso.</strong> Lead contestado e aceito devolve 1 token como extra.</span></li>
         </ul>
-        <p className="mt-4 text-xs text-muted">
-          As cotas são calibradas para que a soma dos tokens do mês seja atendida pelo pool de tráfego pago (CPL meta de
-          R$ 12 no Meta Ads). Variações podem acontecer; nesse caso, usamos os pacotes avulsos e a divulgação orgânica
-          como folga.
-        </p>
       </section>
       <div className="mt-10"><PlanPolicies plans={plans} /></div>
       <section className="mt-14">

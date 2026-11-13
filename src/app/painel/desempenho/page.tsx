@@ -48,7 +48,7 @@ export default async function DesempenhoPage({ searchParams }: { searchParams: P
       </div>
 
       {level === 'basic' ? (
-        <Alert tone="neutral" className="mt-6">Relatórios completos (por modalidade e tempo de contato) estão disponíveis nos planos Profissional e Premium.</Alert>
+        <Alert tone="neutral" className="mt-6">Relatórios completos (por modalidade e tempo de contato) estão disponíveis no plano Profissional.</Alert>
       ) : (
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
           <Card className="p-5">
