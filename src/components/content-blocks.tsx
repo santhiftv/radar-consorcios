@@ -114,7 +114,7 @@ export function PlansGrid({ plans, compact = false }: { plans: PublicPlan[]; com
             )}
             <div className="mt-auto pt-6">
               <ButtonLink
-                href={isOpen ? '/contato?assunto=plano-em-aberto' : `/cadastro?plano=${p.code}`}
+                href={isOpen ? '/contato?assunto=plano-personalizado' : `/cadastro?plano=${p.code}`}
                 variant={p.code === highlight ? 'navy' : 'secondary'}
                 className="w-full"
               >
