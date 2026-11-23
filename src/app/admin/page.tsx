@@ -65,13 +65,6 @@ export default async function AdminDashboard({ searchParams }: { searchParams: P
       ) : (
         <>
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            <Stat label="Solicitações recebidas" value={m.lead_requests} hint={`${m.duplicates} duplicidades bloqueadas`} />
-            <Stat label="Reivindicações" value={m.claims} hint={m.median_minutes_to_claim != null ? `Mediana ${m.median_minutes_to_claim} min até reivindicar` : undefined} />
-            <Stat label="Receita recorrente (MRR)" value={formatBRL(m.mrr_cents, { cents: false })} />
-            <Stat label="Assinaturas ativas" value={Object.values(m.active_subscriptions_by_plan).reduce((a, b) => a + b, 0)} />
-          </div>
-          <h2 className="mb-3 mt-8 font-bold text-navy-900">Projeção com 50 consultores</h2>
-          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             <Stat label="Consultores ativos" value={PROJ_CONSULTANTS} />
             <Stat label="Faturamento recorrente" value={formatBRL(PROJ_CONSULTANTS * PROJ_FEE_CENTS, { cents: false })} />
             <Stat label="Lucro mensal" value={formatBRL(PROJ_PROFIT_CENTS, { cents: false })} />
