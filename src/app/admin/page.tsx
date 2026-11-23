@@ -72,19 +72,12 @@ export default async function AdminDashboard({ searchParams }: { searchParams: P
             <Stat label="Assinaturas ativas" value={Object.values(m.active_subscriptions_by_plan).reduce((a, b) => a + b, 0)} />
           </div>
           <h2 className="mb-3 mt-8 font-bold text-navy-900">Projeção de receita recorrente</h2>
-          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            <Stat label="Consultores ativos" value={PROJ_CONSULTANTS} hint="Base da projeção" />
-            <Stat
-              label="Faturamento mensal"
-              value={formatBRL(PROJ_CONSULTANTS * PROJ_FEE_CENTS, { cents: false })}
-              hint={`${PROJ_CONSULTANTS} × ${formatBRL(PROJ_FEE_CENTS, { cents: false })} de mensalidade`}
-            />
-            <Stat
-              label="Lucro mensal"
-              value={`${formatBRL(PROJ_CONSULTANTS * PROJ_PROFIT_MIN_CENTS, { cents: false })} a ${formatBRL(PROJ_CONSULTANTS * PROJ_PROFIT_MAX_CENTS, { cents: false })}`}
-              hint={`${formatBRL(PROJ_PROFIT_MIN_CENTS, { cents: false })} a ${formatBRL(PROJ_PROFIT_MAX_CENTS, { cents: false })} por consultor`}
-            />
-            <Stat label="Reuniões previstas" value={PROJ_MEETINGS_WEEK} hint="Nesta semana" />
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
+            <Stat label="Consultores ativos" value={PROJ_CONSULTANTS} />
+            <Stat label="Receita recorrente" value={formatBRL(PROJ_CONSULTANTS * PROJ_FEE_CENTS, { cents: false })} />
+            <Stat label="Faturamento mensal" value={formatBRL(PROJ_CONSULTANTS * PROJ_FEE_CENTS, { cents: false })} />
+            <Stat label="Lucro mensal" value={`${formatBRL(PROJ_CONSULTANTS * PROJ_PROFIT_MIN_CENTS, { cents: false })} a ${formatBRL(PROJ_CONSULTANTS * PROJ_PROFIT_MAX_CENTS, { cents: false })}`} />
+            <Stat label="Reuniões previstas" value={PROJ_MEETINGS_WEEK} />
           </div>
           <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-6">
             {[
