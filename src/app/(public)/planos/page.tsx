@@ -14,6 +14,7 @@ import {
   type CreativeTier,
 } from '@/content/creative-plans';
 import { FaqList, PlanPolicies, PlansGrid } from '@/components/content-blocks';
+import { Reveal } from '@/components/reveal';
 import { Badge, ButtonLink, Card, SectionHeading } from '@/components/ui';
 import { getPlans } from '@/lib/server/queries';
 
@@ -167,11 +168,11 @@ export default async function PlanosPage() {
       <section className="container-page py-12 sm:py-16">
         <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr]">
           <div>
-            <SectionHeading
+            <Reveal from="left"><SectionHeading
               eyebrow="Sou consultor"
               title="Leads qualificados e conteúdo pronto para você vender mais consórcio"
               description="Nós criamos os anúncios, trazemos pessoas que pediram proposta e autorizaram o contato, e ainda produzimos os criativos e vídeos do seu Instagram."
-            />
+            /></Reveal>
             <div className="mt-6 flex flex-wrap gap-3">
               <ButtonLink href="#planos" size="lg">Ver planos</ButtonLink>
               <ButtonLink href="/cadastro" variant="secondary" size="lg">Criar minha conta</ButtonLink>
@@ -194,17 +195,17 @@ export default async function PlanosPage() {
               </Card>
             </dl>
           </div>
-          <Photo photo={PHOTOS.hero} eager className="hidden lg:block" />
+          <Reveal from="right"><Photo photo={PHOTOS.hero} eager className="mx-auto w-full max-w-xs" /></Reveal>
         </div>
       </section>
 
       {/* 2. Como funciona a assinatura */}
       <Section tone="soft" id="como-funciona">
-        <SectionHeading
+        <Reveal from="right"><SectionHeading
           eyebrow="Como funciona"
           title="Sua assinatura vira anúncio, e o anúncio vira lead"
           description="Você não precisa investir em tráfego, contratar agência nem aprender a criar campanha. Nós cuidamos dessa parte."
-        />
+        /></Reveal>
         <div className="mt-8 grid items-start gap-8 lg:grid-cols-[1.3fr_1fr]">
           <ol className="grid gap-4 sm:grid-cols-2">
             {PROCESS.map((s) => (
@@ -225,11 +226,11 @@ export default async function PlanosPage() {
       <Section id="o-lead">
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <div>
-            <SectionHeading
+            <Reveal from="left"><SectionHeading
               eyebrow="O que você recebe"
               title="Um lead que já chegou pronto para conversar"
               description="Cada pedido é criado com a autorização da pessoa para ser contatada e com informações sobre o que ela procura. Isso encurta a conversa e deixa a venda mais fácil."
-            />
+            /></Reveal>
             <ul className="mt-6 space-y-3">
               <Check><strong>Contato autorizado.</strong> A pessoa preencheu o formulário e pediu a proposta.</Check>
               <Check><strong>Informações prévias.</strong> Modalidade, valor da carta, parcela desejada, urgência e região, tudo antes do primeiro contato.</Check>
@@ -265,11 +266,11 @@ export default async function PlanosPage() {
 
       {/* 4. Painel */}
       <Section tone="soft" id="painel">
-        <SectionHeading
+        <Reveal from="right"><SectionHeading
           eyebrow="Seu painel"
           title="Tudo organizado em um só lugar"
           description="Depois do pagamento, seu usuário e senha liberam o painel do consultor. Cada consultor vê apenas os leads atribuídos a ele."
-        />
+        /></Reveal>
         <div className="mt-8 grid gap-5 md:grid-cols-3">
           <Card className="p-5">
             <p className="text-xs font-semibold uppercase tracking-wider text-muted">Novos leads</p>
@@ -309,11 +310,11 @@ export default async function PlanosPage() {
 
       {/* 5. Planos de leads */}
       <Section id="planos">
-        <SectionHeading
+        <Reveal from="left"><SectionHeading
           eyebrow="Planos de leads"
           title="Escolha como você quer receber seus leads"
           description="Dois planos mensais com acesso à vitrine de leads e um plano sob medida, com anúncio só seu."
-        />
+        /></Reveal>
         <div className="mt-8"><PlansGrid plans={plans} /></div>
         <Card className="mt-8 grid items-center gap-6 p-6 md:grid-cols-[auto_1fr]">
           <div className="rounded-2xl bg-brand-green-soft px-6 py-5 text-center">
@@ -344,7 +345,7 @@ export default async function PlanosPage() {
       <Section tone="soft" id="personalizado">
         <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.1fr]">
           <Photo photo={PHOTOS.custom} />
-          <div>
+          <Reveal from="right">
             <Badge tone="green">Plano Personalizado</Badge>
             <h2 className="mt-3 text-3xl font-bold sm:text-[2.1rem] sm:leading-tight">Um anúncio feito só para você</h2>
             <p className="mt-3 text-lg text-muted">
@@ -355,7 +356,7 @@ export default async function PlanosPage() {
               <Check><strong>Sem interferência.</strong> Os leads não passam pela vitrine do site nem são disputados por outros consultores.</Check>
               <Check><strong>Funciona como uma agência.</strong> Criativos, segmentação e relatórios mensais incluídos.</Check>
             </ul>
-          </div>
+          </Reveal>
         </div>
         <div className="mt-10">
           <h3 className="text-lg font-bold text-navy-900">Quanto custa</h3>
@@ -377,11 +378,11 @@ export default async function PlanosPage() {
 
       {/* 7. Criativos e vídeos */}
       <Section id="criativos-e-videos">
-        <SectionHeading
+        <Reveal from="right"><SectionHeading
           eyebrow="Criativos e vídeos"
           title="Conteúdo para o seu Instagram, no mesmo padrão do Radar Consórcios"
           description="Além dos leads, você pode contratar criativos e vídeos para manter seu perfil ativo e passar mais confiança para quem pesquisa consórcio."
-        />
+        /></Reveal>
         <div className="mt-8 grid gap-6 lg:grid-cols-2">
           <Card className="p-5 sm:p-6">
             <Photo photo={PHOTOS.creatives} />
@@ -423,11 +424,11 @@ export default async function PlanosPage() {
 
       {/* 8. Comparação com agências */}
       <Section tone="soft" id="comparativo">
-        <SectionHeading
+        <Reveal from="left"><SectionHeading
           eyebrow="Comparativo"
           title="O que o mercado cobra e o que cobramos"
           description="Valores de agências variam bastante. Veja faixas de referência publicadas em 2026 ao lado dos nossos planos."
-        />
+        /></Reveal>
         <div className="mt-8 overflow-x-auto rounded-2xl border border-line bg-white">
           <table className="w-full min-w-[640px] text-left text-sm">
             <thead className="bg-navy-50 text-xs font-semibold uppercase tracking-wider text-muted">
