@@ -26,8 +26,7 @@ interface Metrics {
 // Projeção definida pelo administrador (valores em centavos), não vem do banco.
 const PROJ_CONSULTANTS = 50;
 const PROJ_FEE_CENTS = 59_800;
-const PROJ_PROFIT_MIN_CENTS = 30_000;
-const PROJ_PROFIT_MAX_CENTS = 35_000;
+const PROJ_PROFIT_CENTS = 1_634_900;
 const PROJ_MEETINGS_WEEK = 7;
 
 function Bars({ data, labels }: { data: Record<string, number>; labels?: Record<string, string> }) {
@@ -75,7 +74,7 @@ export default async function AdminDashboard({ searchParams }: { searchParams: P
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             <Stat label="Consultores ativos" value={PROJ_CONSULTANTS} />
             <Stat label="Faturamento recorrente" value={formatBRL(PROJ_CONSULTANTS * PROJ_FEE_CENTS, { cents: false })} />
-            <Stat label="Lucro mensal" value={`${formatBRL(PROJ_CONSULTANTS * PROJ_PROFIT_MIN_CENTS, { cents: false })} a ${formatBRL(PROJ_CONSULTANTS * PROJ_PROFIT_MAX_CENTS, { cents: false })}`} />
+            <Stat label="Lucro mensal" value={formatBRL(PROJ_PROFIT_CENTS, { cents: false })} />
             <Stat label="Reuniões previstas" value={PROJ_MEETINGS_WEEK} />
           </div>
           <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-6">
