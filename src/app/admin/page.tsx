@@ -23,6 +23,13 @@ interface Metrics {
   articles_in_review: number;
 }
 
+// Projeção definida pelo administrador (valores em centavos), não vem do banco.
+const PROJ_CONSULTANTS = 50;
+const PROJ_FEE_CENTS = 59_800;
+const PROJ_PROFIT_MIN_CENTS = 30_000;
+const PROJ_PROFIT_MAX_CENTS = 35_000;
+const PROJ_MEETINGS_WEEK = 7;
+
 function Bars({ data, labels }: { data: Record<string, number>; labels?: Record<string, string> }) {
   const max = Math.max(1, ...Object.values(data));
   const entries = Object.entries(data).sort((a, b) => b[1] - a[1]);
@@ -63,6 +70,21 @@ export default async function AdminDashboard({ searchParams }: { searchParams: P
             <Stat label="Reivindicações" value={m.claims} hint={m.median_minutes_to_claim != null ? `Mediana ${m.median_minutes_to_claim} min até reivindicar` : undefined} />
             <Stat label="Receita recorrente (MRR)" value={formatBRL(m.mrr_cents, { cents: false })} />
             <Stat label="Assinaturas ativas" value={Object.values(m.active_subscriptions_by_plan).reduce((a, b) => a + b, 0)} />
+          </div>
+          <h2 className="mb-3 mt-8 font-bold text-navy-900">Projeção de receita recorrente</h2>
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <Stat label="Consultores ativos" value={PROJ_CONSULTANTS} hint="Base da projeção" />
+            <Stat
+              label="Faturamento mensal"
+              value={formatBRL(PROJ_CONSULTANTS * PROJ_FEE_CENTS, { cents: false })}
+              hint={`${PROJ_CONSULTANTS} × ${formatBRL(PROJ_FEE_CENTS, { cents: false })} de mensalidade`}
+            />
+            <Stat
+              label="Lucro mensal"
+              value={`${formatBRL(PROJ_CONSULTANTS * PROJ_PROFIT_MIN_CENTS, { cents: false })} a ${formatBRL(PROJ_CONSULTANTS * PROJ_PROFIT_MAX_CENTS, { cents: false })}`}
+              hint={`${formatBRL(PROJ_PROFIT_MIN_CENTS, { cents: false })} a ${formatBRL(PROJ_PROFIT_MAX_CENTS, { cents: false })} por consultor`}
+            />
+            <Stat label="Reuniões previstas" value={PROJ_MEETINGS_WEEK} hint="Nesta semana" />
           </div>
           <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-6">
             {[
